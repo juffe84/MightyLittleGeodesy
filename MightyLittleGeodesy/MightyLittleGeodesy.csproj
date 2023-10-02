@@ -14,12 +14,12 @@
 		<VersionPrefix>1.0.4</VersionPrefix>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/bjornsallarp/MightyLittleGeodesy</RepositoryUrl>
+		<RepositoryUrl>https://github.com/jwikberg/MightyLittleGeodesy</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReleaseNotes>Added netstandard2.0 and netstandard2.1 dll</PackageReleaseNotes>
 		<PackageTags>RT90 SWEREF99 WGS84 Geodesy</PackageTags>
 		<Authors>Björn Sållarp, Joel Wikberg</Authors>
-		<PackageProjectUrl>https://github.com/jwikberg/MightyLittleGeodesy</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/bjornsallarp/MightyLittleGeodesy</PackageProjectUrl>
 		<Summary>Translate RT90, WGS84 and SWEREF99 coordinates</Summary>
 		<Description>
 			You can translate both ways between coordinate systems: RT90, SWEREF99 andWGS84.
