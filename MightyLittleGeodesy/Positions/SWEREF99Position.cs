@@ -1,25 +1,25 @@
 ﻿/*
- * MightyLittleGeodesy 
+ * MightyLittleGeodesy
  * RT90, SWEREF99 and WGS84 coordinate transformation library
- * 
+ *
  * Read my blog @ http://blog.sallarp.com
- * 
- * 
+ *
+ *
  * Copyright (C) 2009 Björn Sållarp
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this 
- * software and associated documentation files (the "Software"), to deal in the Software 
- * without restriction, including without limitation the rights to use, copy, modify, 
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
- * permit persons to whom the Software is furnished to do so, subject to the following 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify,
+ * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following
  * conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies or 
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
  * substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
@@ -47,7 +47,7 @@ namespace MightyLittleGeodesy.Positions
         }
 
         /// <summary>
-        /// Create a Sweref99 position from double values with 
+        /// Create a Sweref99 position from double values with
         /// Sweref 99 TM as default projection.
         /// </summary>
         /// <param name="n"></param>
@@ -71,7 +71,7 @@ namespace MightyLittleGeodesy.Positions
             Projection = projection;
         }
 
-                /// <summary>
+        /// <summary>
         /// Create a RT90 position by converting a WGS84 position
         /// </summary>
         /// <param name="position">WGS84 position to convert</param>
@@ -115,42 +115,55 @@ namespace MightyLittleGeodesy.Positions
                 case SWEREFProjection.sweref_99_tm:
                     retVal = "sweref_99_tm";
                     break;
+
                 case SWEREFProjection.sweref_99_12_00:
                     retVal = "sweref_99_1200";
                     break;
+
                 case SWEREFProjection.sweref_99_13_30:
                     retVal = "sweref_99_1330";
                     break;
+
                 case SWEREFProjection.sweref_99_14_15:
                     retVal = "sweref_99_1415";
                     break;
+
                 case SWEREFProjection.sweref_99_15_00:
                     retVal = "sweref_99_1500";
                     break;
+
                 case SWEREFProjection.sweref_99_15_45:
                     retVal = "sweref_99_1545";
                     break;
+
                 case SWEREFProjection.sweref_99_16_30:
                     retVal = "sweref_99_1630";
                     break;
+
                 case SWEREFProjection.sweref_99_17_15:
                     retVal = "sweref_99_1715";
                     break;
+
                 case SWEREFProjection.sweref_99_18_00:
                     retVal = "sweref_99_1800";
                     break;
+
                 case SWEREFProjection.sweref_99_18_45:
                     retVal = "sweref_99_1845";
                     break;
+
                 case SWEREFProjection.sweref_99_20_15:
                     retVal = "sweref_99_2015";
                     break;
+
                 case SWEREFProjection.sweref_99_21_45:
                     retVal = "sweref_99_2145";
                     break;
+
                 case SWEREFProjection.sweref_99_23_15:
                     retVal = "sweref_99_2315";
                     break;
+
                 default:
                     retVal = "sweref_99_tm";
                     break;
@@ -160,6 +173,7 @@ namespace MightyLittleGeodesy.Positions
         }
 
         public SWEREFProjection Projection { get; set; }
+
         public string ProjectionString
         {
             get
@@ -170,7 +184,7 @@ namespace MightyLittleGeodesy.Positions
 
         public override string ToString()
         {
-            return string.Format("N: {0} E: {1} Projection: {2}", Latitude, Longitude, ProjectionString);
+            return $"N: {Latitude} E: {Longitude} Projection: {ProjectionString}";
         }
     }
 }

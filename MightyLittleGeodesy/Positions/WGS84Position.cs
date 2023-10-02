@@ -91,6 +91,7 @@ namespace MightyLittleGeodesy.Positions
                     case WGS84Format.DegreesMinutes:
                         firstValueEndPos = positionString.IndexOf("'", StringComparison.Ordinal);
                         break;
+
                     case WGS84Format.DegreesMinutesSeconds:
                         firstValueEndPos = positionString.IndexOf("\"", StringComparison.Ordinal);
                         break;
@@ -119,9 +120,11 @@ namespace MightyLittleGeodesy.Positions
                 case WGS84Format.DegreesMinutes:
                     this.Latitude = this.ParseValueFromDmString(value, 'S');
                     break;
+
                 case WGS84Format.DegreesMinutesSeconds:
                     this.Latitude = this.ParseValueFromDmsString(value, 'S');
                     break;
+
                 case WGS84Format.Degrees:
                     this.Latitude = double.Parse(value, CultureInfo.InvariantCulture);
                     break;
@@ -141,9 +144,11 @@ namespace MightyLittleGeodesy.Positions
                 case WGS84Format.DegreesMinutes:
                     this.Longitude = this.ParseValueFromDmString(value, 'W');
                     break;
+
                 case WGS84Format.DegreesMinutesSeconds:
                     this.Longitude = this.ParseValueFromDmsString(value, 'W');
                     break;
+
                 case WGS84Format.Degrees:
                     this.Longitude = double.Parse(value, CultureInfo.InvariantCulture);
                     break;
@@ -161,8 +166,10 @@ namespace MightyLittleGeodesy.Positions
             {
                 case WGS84Format.DegreesMinutes:
                     return this.ConvToDmString(this.Latitude, 'N', 'S');
+
                 case WGS84Format.DegreesMinutesSeconds:
                     return this.ConvToDmsString(this.Latitude, 'N', 'S');
+
                 default:
                     return this.Latitude.ToString(CultureInfo.InvariantCulture);
             }
@@ -179,8 +186,10 @@ namespace MightyLittleGeodesy.Positions
             {
                 case WGS84Format.DegreesMinutes:
                     return this.ConvToDmString(this.Longitude, 'E', 'W');
+
                 case WGS84Format.DegreesMinutesSeconds:
                     return this.ConvToDmsString(this.Longitude, 'E', 'W');
+
                 default:
                     return this.Longitude.ToString(CultureInfo.InvariantCulture);
             }
@@ -196,11 +205,7 @@ namespace MightyLittleGeodesy.Positions
             var degrees = Math.Floor(Math.Abs(value));
             var minutes = (Math.Abs(value) - degrees) * 60;
 
-            return string.Format(
-                "{0} {1}º {2}'",
-                value >= 0 ? positiveValue : negativeValue,
-                degrees,
-                (Math.Floor(minutes * 10000) / 10000).ToString(CultureInfo.InvariantCulture));
+            return $"{(value >= 0 ? positiveValue : negativeValue)} {degrees}º {(Math.Floor(minutes * 10000) / 10000).ToString(CultureInfo.InvariantCulture)}'";
         }
 
         private string ConvToDmsString(double value, Char positiveValue, Char negativeValue)
@@ -214,14 +219,8 @@ namespace MightyLittleGeodesy.Positions
             var minutes = Math.Floor((Math.Abs(value) - degrees) * 60);
             var seconds = (Math.Abs(value) - degrees - minutes / 60) * 3600;
 
-            return string.Format(
-                "{0} {1}º {2}' {3}\"",
-                value >= 0 ? positiveValue : negativeValue,
-                degrees,
-                minutes,
-                Math.Round(seconds, 5).ToString(CultureInfo.InvariantCulture));
+            return $"{(value >= 0 ? positiveValue : negativeValue)} {degrees}º {minutes}' {Math.Round(seconds, 5).ToString(CultureInfo.InvariantCulture)}\"";
         }
-
 
         private double ParseValueFromDmString(string value, char positiveChar)
         {
@@ -296,10 +295,7 @@ namespace MightyLittleGeodesy.Positions
 
         public override string ToString()
         {
-            return string.Format(
-                "Latitude: {0}  Longitude: {1}",
-                LatitudeToString(WGS84Format.DegreesMinutesSeconds),
-                LongitudeToString(WGS84Format.DegreesMinutesSeconds));
+            return $"Latitude: {LatitudeToString(WGS84Format.DegreesMinutesSeconds)}  Longitude: {LongitudeToString(WGS84Format.DegreesMinutesSeconds)}";
         }
     }
 }
