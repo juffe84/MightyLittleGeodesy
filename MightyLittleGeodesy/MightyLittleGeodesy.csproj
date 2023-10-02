@@ -1,34 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 
-    <VersionPrefix>1.0.3</VersionPrefix>
-		<VersionSuffix>NetStandard</VersionSuffix>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/bjornsallarp/MightyLittleGeodesy</RepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>Added netstandard2.0 and netstandard2.1 dll</PackageReleaseNotes>
-    <PackageTags>RT90 SWEREF99 WGS84 Geodesy</PackageTags>
-    <Authors>Björn Sållarp</Authors>
-    <PackageProjectUrl>https://github.com/jwikberg/MightyLittleGeodesy</PackageProjectUrl>
-    <Summary>Translate RT90, WGS84 and SWEREF99 coordinates</Summary>
-    <Description>
-      You can translate both ways between coordinate systems: RT90, SWEREF99 andWGS84.
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-      The WGS84 object can parse out positions from strings in DMS (degrees, minutes seconds, and DM (degrees, minutes) format.
+		<PackageId>MightyLittleGeodesy.NetStandard</PackageId>
 
-      All in all it’s a pretty easy to use and powerful library.
-    </Description>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <!-- including PDB files in NuGet for source link because symbolsource.org does not support portable PDBs -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/bjornsallarp/MightyLittleGeodesy</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReleaseNotes>Added netstandard2.0 and netstandard2.1 dll</PackageReleaseNotes>
+		<PackageTags>RT90 SWEREF99 WGS84 Geodesy</PackageTags>
+		<Authors>Björn Sållarp</Authors>
+		<PackageProjectUrl>https://github.com/jwikberg/MightyLittleGeodesy</PackageProjectUrl>
+		<Summary>Translate RT90, WGS84 and SWEREF99 coordinates</Summary>
+		<Description>
+			You can translate both ways between coordinate systems: RT90, SWEREF99 andWGS84.
+
+			The WGS84 object can parse out positions from strings in DMS (degrees, minutes seconds, and DM (degrees, minutes) format.
+
+			All in all it’s a pretty easy to use and powerful library.
+		</Description>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!-- including PDB files in NuGet for source link because symbolsource.org does not support portable PDBs -->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
 </Project>
