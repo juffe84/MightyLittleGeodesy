@@ -29,7 +29,8 @@ namespace MightyLittleGeodesy.Classes
     {
         RT90 = 0,
         WGS84 = 1,
-        SWEREF99 = 2
+        SWEREF99 = 2,
+        ETRS = 3
     }
 
     public abstract class Position

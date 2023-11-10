@@ -27,23 +27,25 @@ using MightyLittleGeodesy.Classes;
 
 namespace MightyLittleGeodesy.Positions
 {
-    public class SWEREF99Position : Position
+    public class ETRS_Position : Position
     {
-        public enum SWEREFProjection
+        public enum ETRSProjection
         {
-            sweref_99_tm = 0,
-            sweref_99_12_00 = 1,
-            sweref_99_13_30 = 2,
-            sweref_99_15_00 = 3,
-            sweref_99_16_30 = 4,
-            sweref_99_18_00 = 5,
-            sweref_99_14_15 = 6,
-            sweref_99_15_45 = 7,
-            sweref_99_17_15 = 8,
-            sweref_99_18_45 = 9,
-            sweref_99_20_15 = 10,
-            sweref_99_21_45 = 11,
-            sweref_99_23_15 = 12
+            etrs_tm35 = 0,
+            etrs_gk19 = 1,
+            etrs_gk20 = 2,
+            etrs_gk21 = 3,
+            etrs_gk22 = 4,
+            etrs_gk23 = 5,
+            etrs_gk24 = 6,
+            etrs_gk25 = 7,
+            etrs_gk26 = 8,
+            etrs_gk27 = 9,
+            etrs_gk28 = 10,
+            etrs_gk29 = 11,
+            etrs_gk30 = 12,
+            etrs_gk31 = 13,
+            etrs_gk32 = 14,
         }
 
         /// <summary>
@@ -52,10 +54,10 @@ namespace MightyLittleGeodesy.Positions
         /// </summary>
         /// <param name="n"></param>
         /// <param name="e"></param>
-        public SWEREF99Position(double n, double e)
-            : base(n, e, Grid.SWEREF99)
+        public ETRS_Position(double n, double e)
+            : base(n, e, Grid.ETRS)
         {
-            Projection = SWEREFProjection.sweref_99_tm;
+            Projection = ETRSProjection.etrs_tm35;
         }
 
         /// <summary>
@@ -65,22 +67,23 @@ namespace MightyLittleGeodesy.Positions
         /// <param name="n"></param>
         /// <param name="e"></param>
         /// <param name="projection"></param>
-        public SWEREF99Position(double n, double e, SWEREFProjection projection)
-            : base(n, e, Grid.SWEREF99)
+        public ETRS_Position(double n, double e, ETRSProjection projection)
+            : base(n, e, Grid.ETRS)
         {
             Projection = projection;
         }
 
-                /// <summary>
+        /// <summary>
         /// Create a RT90 position by converting a WGS84 position
         /// </summary>
         /// <param name="position">WGS84 position to convert</param>
         /// <param name="rt90projection">Projection to convert to</param>
-        public SWEREF99Position(WGS84Position position, SWEREFProjection projection)
-            : base(Grid.SWEREF99)
+        public ETRS_Position(WGS84Position position, ETRSProjection projection)
+            : base(Grid.ETRS)
         {
             GaussKreuger gkProjection = new GaussKreuger();
             gkProjection.swedish_params(GetProjectionString(projection));
+
             var lat_lon = gkProjection.geodetic_to_grid(position.Latitude, position.Longitude);
             Latitude = lat_lon[0];
             Longitude = lat_lon[1];
@@ -95,7 +98,7 @@ namespace MightyLittleGeodesy.Positions
         {
             GaussKreuger gkProjection = new GaussKreuger();
             gkProjection.swedish_params(ProjectionString);
-            var lat_lon = gkProjection.grid_to_geodetic(Latitude, Longitude);
+            var lat_lon = gkProjection.etrs_to_geodetic(Latitude, Longitude);
 
             WGS84Position newPos = new WGS84Position()
             {
@@ -107,59 +110,65 @@ namespace MightyLittleGeodesy.Positions
             return newPos;
         }
 
-        private string GetProjectionString(SWEREFProjection projection)
+        private string GetProjectionString(ETRSProjection projection)
         {
             string retVal = string.Empty;
             switch (projection)
             {
-                case SWEREFProjection.sweref_99_tm:
-                    retVal = "sweref_99_tm";
+                case ETRSProjection.etrs_tm35:
+                    retVal = "etrs_tm35";
                     break;
-                case SWEREFProjection.sweref_99_12_00:
-                    retVal = "sweref_99_1200";
+                case ETRSProjection.etrs_gk19:
+                    retVal = "etrs_gk19";
                     break;
-                case SWEREFProjection.sweref_99_13_30:
-                    retVal = "sweref_99_1330";
+                case ETRSProjection.etrs_gk20:
+                    retVal = "etrs_gk20";
                     break;
-                case SWEREFProjection.sweref_99_14_15:
-                    retVal = "sweref_99_1415";
+                case ETRSProjection.etrs_gk21:
+                    retVal = "etrs_gk21";
                     break;
-                case SWEREFProjection.sweref_99_15_00:
-                    retVal = "sweref_99_1500";
+                case ETRSProjection.etrs_gk22:
+                    retVal = "etrs_gk22";
                     break;
-                case SWEREFProjection.sweref_99_15_45:
-                    retVal = "sweref_99_1545";
+                case ETRSProjection.etrs_gk23:
+                    retVal = "etrs_gk23";
                     break;
-                case SWEREFProjection.sweref_99_16_30:
-                    retVal = "sweref_99_1630";
+                case ETRSProjection.etrs_gk24:
+                    retVal = "etrs_gk24";
                     break;
-                case SWEREFProjection.sweref_99_17_15:
-                    retVal = "sweref_99_1715";
+                case ETRSProjection.etrs_gk25:
+                    retVal = "etrs_gk25";
                     break;
-                case SWEREFProjection.sweref_99_18_00:
-                    retVal = "sweref_99_1800";
+                case ETRSProjection.etrs_gk26:
+                    retVal = "etrs_gk26";
                     break;
-                case SWEREFProjection.sweref_99_18_45:
-                    retVal = "sweref_99_1845";
+                case ETRSProjection.etrs_gk27:
+                    retVal = "etrs_gk27";
                     break;
-                case SWEREFProjection.sweref_99_20_15:
-                    retVal = "sweref_99_2015";
+                case ETRSProjection.etrs_gk28:
+                    retVal = "etrs_gk28";
                     break;
-                case SWEREFProjection.sweref_99_21_45:
-                    retVal = "sweref_99_2145";
+                case ETRSProjection.etrs_gk29:
+                    retVal = "etrs_gk29";
                     break;
-                case SWEREFProjection.sweref_99_23_15:
-                    retVal = "sweref_99_2315";
+                case ETRSProjection.etrs_gk30:
+                    retVal = "etrs_gk30";
+                    break;
+                case ETRSProjection.etrs_gk31:
+                    retVal = "etrs_gk31";
+                    break;
+                case ETRSProjection.etrs_gk32:
+                    retVal = "etrs_gk32";
                     break;
                 default:
-                    retVal = "sweref_99_tm";
+                    retVal = "etrs_tm35tm";
                     break;
             }
 
             return retVal;
         }
 
-        public SWEREFProjection Projection { get; set; }
+        public ETRSProjection Projection { get; set; }
         public string ProjectionString
         {
             get

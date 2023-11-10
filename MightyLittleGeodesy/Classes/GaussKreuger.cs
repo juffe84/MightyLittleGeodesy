@@ -48,6 +48,12 @@ namespace MightyLittleGeodesy.Classes
         double false_northing; // Offset for origo.
         double false_easting; // Offset for origo.
 
+        double f;          // Ellipsoidin litistyssuhde
+        double a;                    // Isoakselin puolikas
+        double lambda_nolla;     // Keskimeridiaani (rad), 27 astetta
+        double k_nolla;                // Mittakaavakerroin
+        double E_nolla;               // Itäkoordinaatti
+
         // Parameters for RT90 and SWEREF99TM.
         // Note: Parameters for RT90 are choosen to eliminate the 
         // differences between Bessel and GRS80-ellipsoides.
@@ -207,9 +213,101 @@ namespace MightyLittleGeodesy.Classes
                 sweref99_params();
                 central_meridian = 23.25;
             }
+            else if (projection == "etrs_tm35")
+            {
+                etrs_tm35_params();
+                //central_meridian = 23.25;
+            }
+            else if (projection == "etrs_gk19")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 19;
+                E_nolla = (1000000 * 19) + 500000;
+            }
+            else if (projection == "etrs_gk20")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 20;
+                E_nolla = (1000000 * 20) + 500000;
+            }
+            else if (projection == "etrs_gk21")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 21;
+                E_nolla = (1000000 * 21) + 500000;
+            }
+            else if (projection == "etrs_gk22")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 22;
+                E_nolla = (1000000 * 22) + 500000;
+            }
+            else if (projection == "etrs_gk23")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 23;
+                E_nolla = (1000000 * 23) + 500000;
+            }
+            else if (projection == "etrs_gk24")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 24;
+                E_nolla = (1000000 * 24) + 500000;
+            }
+            else if (projection == "etrs_gk25")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 25;
+                E_nolla = (1000000 * 25) + 500000;
+            }
+            else if (projection == "etrs_gk26")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 26;
+                E_nolla = (1000000 * 26) + 500000;
+            }
+            else if (projection == "etrs_gk27")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 27;
+                E_nolla = (1000000 * 27) + 500000;
+            }
+            else if (projection == "etrs_gk28")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 28;
+                E_nolla = (1000000 * 28) + 500000;
+            }
+            else if (projection == "etrs_gk29")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 29;
+                E_nolla = (1000000 * 29) + 500000;
+            }
+            else if (projection == "etrs_gk30")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 30;
+                E_nolla = (1000000 * 30) + 500000;
+            }
+            else if (projection == "etrs_gk31")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 31;
+                E_nolla = (1000000 * 31) + 500000;
+            }
+            else if (projection == "etrs_gk32")
+            {
+                etrs_gk_params();
+                lambda_nolla = (Math.PI / 180) * 32;
+                E_nolla = (1000000 * 32) + 500000;
+            }
+
+
             else
             {
                 central_meridian = double.MinValue;
+                lambda_nolla = double.MinValue;
             }
         }
 
@@ -237,6 +335,33 @@ namespace MightyLittleGeodesy.Classes
             scale = 1.0;
             false_northing = 0.0;
             false_easting = 150000.0;
+        }
+
+        private void etrs_tm35_params()
+        {
+            // Vakiot
+            f = 1 / 298.257222101;          // Ellipsoidin litistyssuhde
+            a = 6378137;                    // Isoakselin puolikas
+            lambda_nolla = 0.471238898;     // Keskimeridiaani (rad), 27 astetta
+            k_nolla = 0.9996;                // Mittakaavakerroin
+            E_nolla = 500000;               // Itäkoordinaatti
+        }
+        private void etrs_gk_params()
+        {
+            /*
+
+                        double f = 1 / 298.257222101; // Ellipsoidin litistyssuhde
+                        double a = 6378137; // Isoakselin puolikas
+                        double lambda_nolla = (Math.PI / 180) * gps.GK;
+                        int k_nolla = 1; // Mittakaavakerroin
+                        double E_nolla = (1000000 * gps.GK) + 500000;; // Itäkoordinaatti*/
+            // Vakiot
+            f = 1 / 298.257222101;          // Ellipsoidin litistyssuhde
+            a = 6378137;                    // Isoakselin puolikas
+            lambda_nolla = double.MinValue;     // Keskimeridiaani (rad), 27 astetta
+            k_nolla = 1.0;                // Mittakaavakerroin
+            E_nolla = double.MinValue;               // Itäkoordinaatti
+
         }
 
         // Conversion from geodetic coordinates to grid coordinates.
@@ -287,6 +412,65 @@ namespace MightyLittleGeodesy.Classes
 
             return x_y;
         }
+
+
+
+
+        public double[] etrs_to_geodetic(double N, double E)
+        {
+
+
+            // Kaavat
+            double n = f / (2 - f);
+            double A1 = (a / (1 + n)) * (1 + Math.Pow(n, 2) / 4 + Math.Pow(n, 4) / 64);
+            double e_toiseen = 2 * f - Math.Pow(f, 2);
+            double h1 = (1.0 / 2) * n - (2.0 / 3) * Math.Pow(n, 2) + (37.0 / 96) * Math.Pow(n, 3) - (1.0 / 360) * Math.Pow(n, 4);
+            double h2 = (1.0 / 48) * Math.Pow(n, 2) + (1.0 / 15) * Math.Pow(n, 3) - (437.0 / 1440) * Math.Pow(n, 4);
+            double h3 = (17.0 / 480) * Math.Pow(n, 3) - (37.0 / 840) * Math.Pow(n, 4);
+            double h4 = (4397.0 / 161280) * Math.Pow(n, 4);
+            double zeeta = N / (A1 * k_nolla);
+            double eeta = (E - E_nolla) / (A1 * k_nolla);
+            double zeeta1_pilkku = h1 * Math.Sin(2 * zeeta) * Math.Cosh(2 * eeta);
+            double zeeta2_pilkku = h2 * Math.Sin(4 * zeeta) * Math.Cosh(4 * eeta);
+            double zeeta3_pilkku = h3 * Math.Sin(6 * zeeta) * Math.Cosh(6 * eeta);
+            double zeeta4_pilkku = h4 * Math.Sin(8 * zeeta) * Math.Cosh(8 * eeta);
+            double eeta1_pilkku = h1 * Math.Cos(2 * zeeta) * Math.Sinh(2 * eeta);
+            double eeta2_pilkku = h2 * Math.Cos(4 * zeeta) * Math.Sinh(4 * eeta);
+            double eeta3_pilkku = h3 * Math.Cos(6 * zeeta) * Math.Sinh(6 * eeta);
+            double eeta4_pilkku = h4 * Math.Cos(8 * zeeta) * Math.Sinh(8 * eeta);
+            double zeeta_pilkku = zeeta - (zeeta1_pilkku + zeeta2_pilkku + zeeta3_pilkku + zeeta4_pilkku);
+            double eeta_pilkku = eeta - (eeta1_pilkku + eeta2_pilkku + eeta3_pilkku + eeta4_pilkku);
+            double beeta = Math.Asin((1 / Math.Cosh(eeta_pilkku) * Math.Sin(zeeta_pilkku)));
+            double l = Math.Asin(Math.Tanh(eeta_pilkku) / (Math.Cos(beeta)));
+            double Q = Asinh(Math.Tan(beeta));
+            double Q_pilkku = Q + Math.Sqrt(e_toiseen) * Atanh(Math.Sqrt(e_toiseen) * Math.Tanh(Q));
+
+            for (int kierros = 1; kierros < 5; kierros++)
+            {
+                Q_pilkku = Q + Math.Sqrt(e_toiseen) * Atanh(Math.Sqrt(e_toiseen) * Math.Tanh(Q_pilkku));
+            }
+
+            // Tulos radiaaneina
+            double fii = Math.Atan(Math.Sinh(Q_pilkku));
+            double lambda = lambda_nolla + l;
+
+            // Tulos asteina
+            fii = fii * (180 / Math.PI);
+            lambda = lambda * (180 / Math.PI);
+
+            return new double[] { fii, lambda };
+        }
+
+        public static double Atanh(double x)
+        {
+            return (Math.Log(1 + x) - Math.Log(1 - x)) / 2;
+        }
+        static double Asinh(double x)
+        {
+            return Math.Log(x + Math.Sqrt(x * x + 1));
+        }
+
+
 
         // Conversion from grid coordinates to geodetic coordinates.
         public double[] grid_to_geodetic(double x, double y)
